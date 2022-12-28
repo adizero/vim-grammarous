@@ -18,9 +18,9 @@ function! grammarous#downloader#download(jar_dir)
     if executable('axel')
         let cmd = printf('axel -a -n 2 -o %s %s 2>&1', tmp_file, g:grammarous#jar_url)
     elseif executable('wget')
-        let cmd = printf('wget -O %s %s 2>&1', tmp_file, g:grammarous#jar_url)
+        let cmd = printf('wget --no-check-certificate -O %s %s 2>&1', tmp_file, g:grammarous#jar_url)
     elseif executable('curl')
-        let cmd = printf('curl -L -o %s %s 2>&1', tmp_file, g:grammarous#jar_url)
+        let cmd = printf('curl --insecure -L -o %s %s 2>&1', tmp_file, g:grammarous#jar_url)
     else
         call s:error("could not find 'axel', 'curl', or 'wget'", a:jar_dir)
         return 0
